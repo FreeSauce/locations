@@ -16,6 +16,8 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+from drops import views
 urlpatterns = [
+    url(r'^studio/', views.studio, name="studio"),
     url(r'^admin/', admin.site.urls),
 ]
