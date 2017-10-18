@@ -19,5 +19,6 @@ from django.contrib import admin
 from drops import views
 urlpatterns = [
     url(r'^studio/', views.studio, name="studio"),
+    url(r'^create/', views.create, name="create_drop"),
     url(r'^admin/', admin.site.urls),
 ]
