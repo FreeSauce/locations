@@ -2,11 +2,13 @@
 
 {% block title %} Studio{% endblock %}
 {% block content %}
+<ul>
 {% if artpieces %}
   {% for art in artpieces %}
-    {{art.title}}
+    <li>{{art.title}}</li>
   {% endfor %}
-  <a href="{% url 'create_drop'%}">Make another drop </a>
+  <li><a href="{% url 'create_drop'%}">Make another drop </a></li>
+ <ul>
 {% else %}
 <h1>Studio</h1>
 <h2>Created Someting Cool?</h2>

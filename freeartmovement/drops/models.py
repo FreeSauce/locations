@@ -7,9 +7,11 @@ from locations.models import City
 # Create your models here.
 class ArtPiece(models.Model):
 	creator = models.ForeignKey(User, null=False)
-	title = models.CharField(max_length=80)
+	title = models.CharField(max_length=80, unique=True)
 	city = models.ForeignKey(City, related_name='artpiece')
 	created_at = models.DateTimeField(auto_now_add=True)
+	uuid = models.CharField(max_length=36, null=True)
+	trimmed_uuid = models.CharField(max_length=8, null=True)
 	url_slug = models.SlugField(blank=True)
 	likes = models.IntegerField(default=0)
 
