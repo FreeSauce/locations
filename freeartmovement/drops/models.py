@@ -6,12 +6,21 @@ from locations.models import City
 
 # Create your models here.
 class ArtPiece(models.Model):
+
+	READY = 'Ready to Drop'
+	DROPPED = 'Dropped!'
+	# A list of choices	
+	DROP_STATUS_CHOICES = ((READY, 'Ready to Drop'), (DROPPED, 'Dropped!'),)
+
+
 	creator = models.ForeignKey(User, null=False)
 	title = models.CharField(max_length=80, unique=True)
 	city = models.ForeignKey(City, related_name='artpiece')
 	created_at = models.DateTimeField(auto_now_add=True)
 	uuid = models.CharField(max_length=36, null=True)
 	trimmed_uuid = models.CharField(max_length=8, null=True)
+	status = models.CharField(max_length=11, choices=DROP_STATUS_CHOICES, default=READY)
+
 	url_slug = models.SlugField(blank=True)
 	likes = models.IntegerField(default=0)
 
