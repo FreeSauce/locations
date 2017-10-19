@@ -2,13 +2,28 @@
 
 {% block title %} Studio{% endblock %}
 {% block content %}
-<ul>
 {% if artpieces %}
+<table>
+<thead>
+				<tr>
+					<th> Thumbnail </th>
+					<th>Drop Name </th>
+					<th>Status </th>
+					<th>Recovery Code </th>
+					<th>Update </th>
+				</tr>
+			</thead>
   {% for art in artpieces %}
-    <li>{{art.title}}</li>
+    <tr>
+    <td>Pic</td>
+    <td>{{art.title}}</td>
+    <td>{{art.status}}</td>
+    <td>{{art.trimmed_uuid}}</td>
+    <td><a href="#">Edit</a></td>
+    </tr>
   {% endfor %}
-  <li><a href="{% url 'create_drop'%}">Make another drop </a></li>
- <ul>
+ <table>
+ <a href="{% url 'create_drop'%}">Make another drop </a>
 {% else %}
 <h1>Studio</h1>
 <h2>Created Someting Cool?</h2>
