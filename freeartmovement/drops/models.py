@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
 from django.template.defaultfilters import slugify
 
 from locations.models import City
@@ -13,7 +13,7 @@ class ArtPiece(models.Model):
 	DROP_STATUS_CHOICES = ((READY, 'Ready to Drop'), (DROPPED, 'Dropped!'),)
 
 
-	creator = models.ForeignKey(User, null=False)
+	creator = models.ForeignKey(settings.AUTH_USER_MODEL, null=False)
 	title = models.CharField(max_length=80, unique=True)
 	city = models.ForeignKey(City, related_name='artpiece')
 	created_at = models.DateTimeField(auto_now_add=True)

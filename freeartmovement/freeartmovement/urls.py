@@ -17,7 +17,10 @@ from django.conf.urls import url
 from django.contrib import admin
 
 from drops import views
+from accounts import views as accounts_views
+
 urlpatterns = [
+    url(r'^signup/', accounts_views.signup, name="signup"),
     url(r'^studio/', views.studio, name="studio"),
     url(r'^create/', views.create, name="create_drop"),
     url(r'^admin/', admin.site.urls),
