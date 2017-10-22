@@ -1,9 +1,9 @@
 import uuid, datetime
-from django.contrib.auth.models import User
 from django.shortcuts import render
 
 from .models import ArtPiece
 from locations.models import City
+from accounts.models import User
 
 # Create your views here.
 def studio(request):

@@ -5,7 +5,13 @@
     <title>{% block title %}{% endblock %}</title>
   </head>
   <body>
-
+  <nav>
+  	<li><a href="{% url 'dashboard'%}">Dashboard</a></li>
+  	<li><a href="{% url 'studio'%}">Studio</a></li>
+  	<li><a href="{% url 'create_drop'%}">Create</a></li>
+  	<li><a href="#">Browse</a></li>
+  	<li><a href="{% url 'logout'%}">Log out</a></li>
+  </nav>
       {% block content %}
       {% endblock %}
 

@@ -123,5 +123,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'accounts.User'
-LOGOUT_REDIRECT_URL = '/create'
+LOGOUT_REDIRECT_URL = '/login/'
+LOGIN_REDIRECT_URL = '/dashboard/'
+
 
