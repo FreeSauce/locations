@@ -7,10 +7,12 @@ from locations.models import City
 
 class SignupForm(UserCreationForm):
 	location = forms.ModelChoiceField(queryset=City.objects.all(), required=True, initial=1)
+	email = forms.CharField(max_length=254, required=True, widget=forms.EmailInput())
+
 
 	class Meta:
 		model = User
-		fields = ['username','location','password1','password2']
+		fields = ['username','email','location','password1','password2']
 
 	def save (self, commit=True):
 		user = super(SignupForm, self).save(commit=False)

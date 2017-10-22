@@ -18,9 +18,12 @@ from django.contrib import admin
 
 from drops import views
 from accounts import views as accounts_views
+from django.contrib.auth import views as auth_views
+
 
 urlpatterns = [
     url(r'^signup/', accounts_views.signup, name="signup"),
+    url(r'^logout/$', auth_views.LogoutView.as_view(), name='logout'),
     url(r'^studio/', views.studio, name="studio"),
     url(r'^create/', views.create, name="create_drop"),
     url(r'^admin/', admin.site.urls),
