@@ -6,6 +6,9 @@
 <h2>Dashboard</h2>
 <h3>Your Area: {{user.location}}</h3>
 <h3>Recent Drops In  {{user.location}}</h3>
+{% for drop in drops %}
+	{{drop.title}}
+{% endfor %}
 <h3>Have You Met Any of the People In  {{user.location}}</h3>
 {% for user in users %}
 	{{user.username}}

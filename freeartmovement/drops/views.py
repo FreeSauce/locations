@@ -11,7 +11,7 @@ def studio(request):
         return render(request, 'studio.html',{})
     artpieces = ArtPiece.objects.filter(creator=request.user)
     print (artpieces)
-    return render(request, 'studio.html',{'artpieces':artpieces})
+    return render(request, 'secured/studio.html',{'artpieces':artpieces})
     
 
 def create(request):
@@ -32,6 +32,6 @@ def create(request):
     	url_slug = title,
     	likes = 5
         )
-        return render(request, 'created.html',{'uuid':confirmed_drop_id[:8]})
+        return render(request, 'secured/created.html',{'uuid':confirmed_drop_id[:8]})
     unique_drop_id = str(uuid.uuid4())
-    return render(request, 'create.html',{'uuid':unique_drop_id})
+    return render(request, 'secured/create.html',{'uuid':unique_drop_id})
