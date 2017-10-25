@@ -5,6 +5,8 @@ from .models import ArtPiece
 from locations.models import City
 from accounts.models import User
 
+from .forms import ArtPieceForm
+
 # Create your views here.
 def studio(request):
     if (request.user.is_anonymous()):
@@ -16,22 +18,18 @@ def studio(request):
 
 def create(request):
     
-    if request.method == 'POST':
-        title = request.POST['title']
-        confirmed_drop_id = request.POST['uuid']
-
-        user = User.objects.first()
-        city = City.objects.first()
-        drop = ArtPiece.objects.create(
-        creator = user,
-    	title = title,
-    	city = city,
-        uuid = confirmed_drop_id,
-        trimmed_uuid = confirmed_drop_id[:8],
-    	created_at = datetime.datetime.now(),
-    	url_slug = title,
-    	likes = 5
-        )
-        return render(request, 'secured/created.html',{'uuid':confirmed_drop_id[:8]})
-    unique_drop_id = str(uuid.uuid4())
-    return render(request, 'secured/create.html',{'uuid':unique_drop_id})
+     if request.method == 'POST':
+        form =ArtPieceForm(request.POST, request.FILES) 
+        if form.is_valid():
+            drop = form.save(commit=False)
+            drop.creator = User.objects.get(username=request.user)  # use your own profile here
+            drop.city = drop.creator.location
+            drop.uuid = uuid.uuid4()
+            drop.trimmed_uuid = uuid.uuid4()
+            drop.save()
+            return render(request, 'secured-pages/created.html',{'uuid':unique_drop_id})
+            
+     else:
+        form = ArtPieceForm()
+        unique_drop_id = str(uuid.uuid4())
+        return render(request, 'secured-pages/create.html',{'form':form,'uuid':unique_drop_id})

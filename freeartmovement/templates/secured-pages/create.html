@@ -1,16 +1,11 @@
-{% extends 'base.html' %}
+{% extends 'secured-pages/base.html' %}
 
 {% block title %} Create{% endblock %}
 {% block content %}
 <h2>Name it & upload a pic.</h2>
 <form method="post">
     {% csrf_token %}
-    <div>
-      <label for="drop_title">Title</label>
-      <input type="text" id="drop_title" name="title">
-      <input type="hidden" id="drop_uuid" name="uuid" value="{{uuid}}">
-
-    </div>
+    {{form.as_p}}
     <button type="submit">All Done!</button>
   </form>
 {% endblock %}
