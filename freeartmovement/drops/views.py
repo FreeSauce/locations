@@ -24,10 +24,10 @@ def create(request):
             drop = form.save(commit=False)
             drop.creator = User.objects.get(username=request.user)  # use your own profile here
             drop.city = drop.creator.location
-            drop.uuid = uuid.uuid4()
-            drop.trimmed_uuid = uuid.uuid4()
+            drop.uuid = str(uuid.uuid4())
+            drop.trimmed_uuid = drop.uuid[:8]
             drop.save()
-            return render(request, 'secured-pages/created.html',{'uuid':unique_drop_id})
+            return render(request, 'secured-pages/created.html',{'uuid':drop.trimmed_uuid})
             
      else:
         form = ArtPieceForm()
