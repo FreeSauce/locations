@@ -1,13 +1,18 @@
-from accounts.forms import SignupForm
-from django.contrib.auth import login as auth_login
+# Django Imports
 from django.shortcuts import render, redirect
-
+from django.contrib.auth import login as auth_login
+# App Imports
 from accounts.models import User
 from drops.models import ArtPiece
+from accounts.forms import SignupForm
+
+
 
 
 # Create your views here.
+
 def signup(request):
+	""" User signup view that uses the SignupForm with the location field. """
 	if request.method == 'POST':
 		form = SignupForm(request.POST)
 		if form.is_valid():
@@ -16,9 +21,10 @@ def signup(request):
 			return redirect('dashboard')
 	else:
 		form = SignupForm()
-	return render(request, 'open/signup.html', {'form':form})
+	return render(request, 'open-pages/signup.html', {'form':form})
 
 def dashboard(request):
+	""" The dashboard view is the first view seen after log in. """
 	drops = ArtPiece.objects.filter(city=request.user.location)
 	users_in_town = User.objects.filter(location=request.user.location).exclude(username=request.user)
 	return render(request, 'secured/dashboard.html', {'users':users_in_town, 'drops':drops})

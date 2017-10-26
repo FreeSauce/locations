@@ -1,4 +1,7 @@
+# Python Imports
 from django.contrib import admin
+# Relative Imports
 from .models import User
-# Register your models here.
+
+# Registering models for the admin
 admin.site.register(User)

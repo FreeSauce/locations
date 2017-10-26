@@ -1,16 +1,17 @@
+# Django Imports
 from django.db import models
 from django.conf import settings
 from django.template.defaultfilters import slugify
-
+# App Imports
 from locations.models import City
 
 # Create your models here.
 
-def build_a_path(instance, filename):
+def user_uploads(instance, filename):
+	""" Constructs a file system path for user uploads. """
 	return '%Y/%b/{0}/{1}'.format(instance.creator,filename)
 
 class ArtPiece(models.Model):
-
 	READY = 'Ready to Drop'
 	DROPPED = 'Dropped!'
 	# A list of choices	
@@ -18,7 +19,7 @@ class ArtPiece(models.Model):
 
 	creator = models.ForeignKey(settings.AUTH_USER_MODEL, null=True)
 	title = models.CharField(max_length=80, unique=True, blank=False, null=False)
-	preview_image = models.ImageField(upload_to=build_a_path, default='stock/stealth_drop.png')
+	preview_image = models.ImageField(upload_to=user_uploads, default='stock/stealth_drop.png')
 	city = models.ForeignKey(City, related_name='artpiece', null=True)
 	created_at = models.DateTimeField(auto_now_add=True)
 	uuid = models.CharField(max_length=36, null=True)

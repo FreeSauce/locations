@@ -1,3 +1,8 @@
+# Python Imports
+# Django Imports
+# App Imports
+# Relative Imports
+
 from django.contrib import admin
 from .models import Country, State, City
 

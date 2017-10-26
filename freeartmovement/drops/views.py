@@ -1,24 +1,30 @@
+# Python Imports
 import uuid, datetime
+
+# Django Imports
 from django.shortcuts import render
 
-from .models import ArtPiece
+# App Imports
 from locations.models import City
 from accounts.models import User
 
+# Relative Imports
+from .models import ArtPiece
 from .forms import ArtPieceForm
 
-# Create your views here.
+
 def studio(request):
+    """ The studio view displays a users' drop creations. """
     if (request.user.is_anonymous()):
         return render(request, 'studio.html',{})
     artpieces = ArtPiece.objects.filter(creator=request.user)
     print (artpieces)
     return render(request, 'secured/studio.html',{'artpieces':artpieces})
     
-
+# Create Drop View
 def create(request):
-    
-     if request.method == 'POST':
+    """ The create view is the first step in creating a drop & is used only as a preview. """
+    if request.method == 'POST':
         form =ArtPieceForm(request.POST, request.FILES) 
         if form.is_valid():
             drop = form.save(commit=False)
@@ -29,7 +35,7 @@ def create(request):
             drop.save()
             return render(request, 'secured-pages/created.html',{'uuid':drop.trimmed_uuid})
             
-     else:
+    else:
         form = ArtPieceForm()
         unique_drop_id = str(uuid.uuid4())
         return render(request, 'secured-pages/create.html',{'form':form,'uuid':unique_drop_id})

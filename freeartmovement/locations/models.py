@@ -1,3 +1,8 @@
+# Python Imports
+# Django Imports
+# App Imports
+# Relative Imports
+
 from django.db import models
 
 # Create your models here.

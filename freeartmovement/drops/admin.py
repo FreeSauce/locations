@@ -1,4 +1,6 @@
+# Django Imports
 from django.contrib import admin
+# Relative Imports
 from . import models
 
 # Register your models here.

@@ -1,3 +1,7 @@
+# Python Imports
+# Django Imports
+# App Imports
+# Relative Imports
 from django.db import models
 from locations.models import City
 
