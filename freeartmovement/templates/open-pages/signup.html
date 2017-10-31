@@ -1,5 +1,13 @@
 {% extends 'open-pages/base_no_auth.html' %}
 
+{% block navigation %}
+	<li><a href="{% url 'home'%}">Home</a></li>
+  	<li><a href="{% url 'about'%}">About</a></li>
+  	<li><a href="{% url 'login'%}">Log In</a></li>
+  	<li>Sign Up</li>
+{% endblock %}
+
+
 {% block content %}
   <h2>Sign up</h2>
       <form method="post" novalidate>

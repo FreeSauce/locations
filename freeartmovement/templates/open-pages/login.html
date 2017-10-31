@@ -1,4 +1,11 @@
-{% extends 'secured-pages/base.html' %}
+{% extends 'open-pages/base_no_auth.html' %}
+
+{% block navigation %}
+	<li><a href="{% url 'home'%}">Home</a></li>
+  	<li><a href="{% url 'about'%}">About</a></li>
+  	<li>Log In</li>
+  	<li><a href="{% url 'signup'%}">Sign Up</a></li>
+{% endblock %}
 
 {% block content %}
   <h2>Log In</h2>

@@ -27,4 +27,4 @@ def dashboard(request):
 	""" The dashboard view is the first view seen after log in. """
 	drops = ArtPiece.objects.filter(city=request.user.location)
 	users_in_town = User.objects.filter(location=request.user.location).exclude(username=request.user)
-	return render(request, 'secured/dashboard.html', {'users':users_in_town, 'drops':drops})
+	return render(request, 'secured-pages/dashboard.html', {'users':users_in_town, 'drops':drops})

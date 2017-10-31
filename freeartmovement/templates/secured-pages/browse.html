@@ -1,0 +1,10 @@
+{% extends 'secured-pages/base.html' %}
+
+{% block title %} Dashboard{% endblock %}
+{% block content %}
+<h2>Drops in your area ({{user.location}})</h2>
+{% for drop in drops_drops_in_area %}
+	{{drop.title}}
+{% endfor %}
+
+{% endblock %}

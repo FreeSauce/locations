@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'secured-pages/base.html' %}
 
 {% block title %} Studio{% endblock %}
 {% block content %}
@@ -15,9 +15,9 @@
 			</thead>
   {% for art in artpieces %}
     <tr>
-    <td>Pic</td>
+    <td><img src="{{art.preview_image}}"/></td>
     <td>{{art.title}}</td>
-    <td>{{art.status}}</td>
+    <td><a href="#">{{art.status}}</a></td>
     <td>{{art.trimmed_uuid}}</td>
     <td><a href="#">Edit</a></td>
     </tr>

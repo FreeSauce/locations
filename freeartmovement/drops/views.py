@@ -19,9 +19,8 @@ def studio(request):
         return render(request, 'studio.html',{})
     artpieces = ArtPiece.objects.filter(creator=request.user)
     print (artpieces)
-    return render(request, 'secured/studio.html',{'artpieces':artpieces})
+    return render(request, 'secured-pages//studio.html',{'artpieces':artpieces})
     
-# Create Drop View
 def create(request):
     """ The create view is the first step in creating a drop & is used only as a preview. """
     if request.method == 'POST':
@@ -39,3 +38,7 @@ def create(request):
         form = ArtPieceForm()
         unique_drop_id = str(uuid.uuid4())
         return render(request, 'secured-pages/create.html',{'form':form,'uuid':unique_drop_id})
+
+def browse(request):
+    drops = ArtPiece.objects.filter(city=request.user.location)
+    return render(request, 'secured-pages/browse.html', {'drops_in_area':drops})        
