@@ -1,9 +1,27 @@
 {% extends 'secured-pages/base.html' %}
 
+{% block loading %}  
+	{% load static %} {% load leaflet_tags %}	
+{% endblock %}
+
+
+{% block head %}
+	{% leaflet_js %}
+	{% leaflet_css %}
+	<style type="text/css">
+		html,body  {height: 100%; width: 100%; margin: 0px; padding: 0px;}
+		#arena {height: 100%;}
+		.leaflet-popup-content { width:auto !important;}
+		
+	</style>
+{% endblock %}
+
 {% block title %} Dashboard{% endblock %}
 {% block content %}
 <h1>Hello, {{user.username}}!</h1>
 <h2>Dashboard</h2>
+	{% leaflet_map "arena" callback="window.hint_station_layer" %}
+
 <h3>Your Area: {{user.location}}</h3>
 <h3>Recent Drops In  {{user.location}}</h3>
 {% for drop in drops %}
@@ -13,4 +31,9 @@
 {% for user in users %}
 	{{user.username}}
 {% endfor %}
+{% endblock %}
+
+
+{% block javascript %}
+	<script type="text/javascript" src="{% static 'js/leaflet.ajax.js' %}"></script>
 {% endblock %}

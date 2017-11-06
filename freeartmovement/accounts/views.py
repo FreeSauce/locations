@@ -1,6 +1,9 @@
 # Django Imports
 from django.shortcuts import render, redirect
+from django.views.generic import TemplateView
 from django.contrib.auth import login as auth_login
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 # App Imports
 from accounts.models import User
 from drops.models import ArtPiece
@@ -28,3 +31,7 @@ def dashboard(request):
 	drops = ArtPiece.objects.filter(city=request.user.location)
 	users_in_town = User.objects.filter(location=request.user.location).exclude(username=request.user)
 	return render(request, 'secured-pages/dashboard.html', {'users':users_in_town, 'drops':drops})
+
+class DashboardPageView(LoginRequiredMixin, TemplateView):
+	""" Uses TempalteView to render dashboard page. """
+	template_name ='secured-pages/dashboard.html'	

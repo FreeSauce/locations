@@ -1,6 +1,8 @@
 # Python Imports
 # Django Imports
 # App Imports
+
+
 # Relative Imports
 
 from django.shortcuts import render
@@ -16,7 +18,7 @@ def about(request):
 
 def contact(request):
 	""" The contact view returns the no auth required contact_us.html template"""
-	return render(request, 'open-pages/contact_us.html')
+	return render(request, 'open-pages/contact.html')
 
 def login(request):
 	""" The login view returns the login.html template"""

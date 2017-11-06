@@ -1,11 +1,17 @@
+# Python Imports
+import uuid
 # Django Imports
 from django.db import models
 from django.conf import settings
+from django.contrib.gis.db import models
 from django.template.defaultfilters import slugify
 # App Imports
 from locations.models import City
 
 # Create your models here.
+
+def create_uuid():
+	return str(uuid.uuid4())
 
 def user_uploads(instance, filename):
 	""" Constructs a file system path for user uploads. """
@@ -22,12 +28,12 @@ class ArtPiece(models.Model):
 	preview_image = models.ImageField(upload_to=user_uploads, default='stock/stealth_drop.png')
 	city = models.ForeignKey(City, related_name='artpiece', null=True)
 	created_at = models.DateTimeField(auto_now_add=True)
-	uuid = models.CharField(max_length=36, null=True)
-	trimmed_uuid = models.CharField(max_length=8, null=True)
-	status = models.CharField(max_length=11, choices=DROP_STATUS_CHOICES, default=READY)
+	uuid = models.CharField(max_length=36, default=create_uuid)
+	status = models.CharField(max_length=13, choices=DROP_STATUS_CHOICES, default=READY)
 
 	url_slug = models.SlugField(blank=False)
 	likes = models.IntegerField(default=0)
+
 
 	def __str__(self):
 		""" A string representation of the ArtPiece model for readability. """
@@ -40,3 +46,16 @@ class ArtPiece(models.Model):
 
 	class Meta:
 		ordering = ['-created_at']
+
+class Hint(models.Model):
+	""" Every art piece needs to be associated with hints."""
+	artpiece = models.OneToOneField(ArtPiece, on_delete=models.CASCADE)
+	riddle = models.TextField()
+	gps_coords = models.PointField(srid=4326, null=True)	
+
+	
+	def __str__(self):
+		return "Hints for {}".format(self.artpiece.title)
+
+	def hints_to_dict(self):
+		return {'riddle':self.riddle,'map_clue':self.gps_coords}

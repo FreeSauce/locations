@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
+    'formtools',
+    'leaflet',
     'locations',
     'stations',
     'drops',
@@ -80,8 +83,12 @@ WSGI_APPLICATION = 'freeartmovement.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'sntchd',
+        'USER': 'postgres',
+        'HOST': 'localhost',
+        'PASSWORD':'300112', 
+        'PORT': '5432',
     }
 }
 
@@ -126,6 +133,20 @@ STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'accounts.User'
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = '/dashboard'
+
+
+# Leaflet configuration
+LEAFLET_CONFIG ={
+    'DEFAULT_CENTER': (37.0902, -95.7129),
+    'DEFAULT_ZOOM': 4,
+    'MAX_ZOOM': 20,
+    #'MIN_ZOOM': 4,
+    'SCALE': 'both',
+    'RESET_VIEW': False,
+    'ATTRIBUTION_PREFIX': 'SNTCHD 2017',
+}
+
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 

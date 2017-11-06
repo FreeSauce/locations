@@ -1,0 +1,12 @@
+{% extends 'secured-pages/base.html' %}
+
+{% block title %} Drop Now{% endblock %}
+{% block content %}
+<h2>Hints for {{artpiece.title}}</h2>
+<form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Drop Now!</button>
+  </form>
+
+{% endblock %}

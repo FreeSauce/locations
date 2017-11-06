@@ -1,8 +1,15 @@
 <!DOCTYPE html>
 <html>
+{% block loading %} {% endblock %}
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %}{% endblock %}</title>
+    <style>
+      html {position: relative; min-height: 100%; }
+      body {margin-bottom: 60px;}
+    </style>
+    {% block head %}{% endblock %}
   </head>
   <body>
   <nav>
@@ -14,6 +21,6 @@
   </nav>
       {% block content %}
       {% endblock %}
-
+{% block javascript %} {% endblock %}
   </body>
 </html>

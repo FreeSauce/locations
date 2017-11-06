@@ -15,10 +15,10 @@
 			</thead>
   {% for art in artpieces %}
     <tr>
-    <td><img src="{{art.preview_image}}"/></td>
+    <td><img src="{{MEDIA_URL}}{{art.preview_image}}" width="64px"/></td>
     <td>{{art.title}}</td>
-    <td><a href="#">{{art.status}}</a></td>
-    <td>{{art.trimmed_uuid}}</td>
+    <td><a href="{% url 'drop_now' pk=art.pk %}">{{art.status}}</a></td>
+    <td>{{art.uuid |truncatechars:11|slice:"-3"}}</td>
     <td><a href="#">Edit</a></td>
     </tr>
   {% endfor %}
